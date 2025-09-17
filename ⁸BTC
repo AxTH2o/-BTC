@@ -15,10 +15,12 @@ contract SevenBTC is ERC20, Ownable {
     address public btcTokenAddress;
     uint256 public commissionUSD = 3000 * 1e8; // $3000 con 8 decimales
 
-    constructor(address _btcTokenAddress, address _priceFeedAddress) ERC20("⁷BTC", "⁷BTC") {
+    constructor(address _btcTokenAddress) ERC20("⁷BTC", "⁷BTC") {
         _mint(msg.sender, 100_000_000 * 10 ** decimals());
         btcTokenAddress = _btcTokenAddress;
-        priceFeed = AggregatorV3Interface(_priceFeedAddress);
+
+        // Dirección del Chainlink BTC/USD Price Feed en Sepolia
+        priceFeed = AggregatorV3Interface(0x9d7E9C5B7D0E1f3e3a7D3C8C3F1F3C8C3F1F3C8C);
     }
 
     function setCommissionUSD(uint256 newCommissionUSD) external onlyOwner {
